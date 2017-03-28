@@ -1,0 +1,20 @@
+package by.beregeiko.aop.secure;
+
+/**
+ * Created by Think on 03.02.2017.
+ */
+public class SecurityManager {
+    ThreadLocal<UserInfo> threadLocal = new ThreadLocal<UserInfo>();
+
+    public void login(String userName, String password) {
+        threadLocal.set(new UserInfo(userName, password));
+    }
+
+    public void logout() {
+        threadLocal.set(null);
+    }
+
+    public UserInfo getLoggedOnUser() {
+        return threadLocal.get();
+    }
+}
